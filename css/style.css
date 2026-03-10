@@ -222,6 +222,7 @@ h2.section-title span {
   margin-bottom: 40px;
   opacity: 0;
   transform: translateY(20px);
+  filter: invert(1) brightness(2);
   animation: fadeUp 1s var(--ease-out) 0.2s forwards;
 }
 
