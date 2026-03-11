@@ -79,10 +79,15 @@
   }
 
   /* ---------- Video modal ---------- */
-  function openModal(videoId) {
+  function openModal(videoId, platform) {
     if (!modal || !modalIframe) return;
-    modalIframe.src =
-      'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+    if (platform === 'vimeo') {
+      modalIframe.src =
+        'https://player.vimeo.com/video/' + videoId + '?autoplay=1';
+    } else {
+      modalIframe.src =
+        'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+    }
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -98,8 +103,9 @@
   document.querySelectorAll('.video-card').forEach(function (card) {
     card.addEventListener('click', function () {
       var id = this.getAttribute('data-video-id');
-      if (id && id.indexOf('VIDEO_ID') === -1) {
-        openModal(id);
+      var platform = this.getAttribute('data-video-platform') || 'youtube';
+      if (id) {
+        openModal(id, platform);
       }
     });
   });
